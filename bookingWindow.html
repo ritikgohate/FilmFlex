@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap" rel="stylesheet">
+    <script src="/script.js" defer type="text/javascript"></script>
+    <link rel="preload" href="/Style.css">
+    <title>Ticket@FilmFlex</title>
+</head>
+
+<body>
+    <div class="topBar">
+        <div class="menu" onclick="navCtrl()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div class="logo"><a href="/index.html"> FilmFlex </a></div>
+        <a class="signInUp" href="/loginPage.html">
+            <div>Login/Signup</div>
+        </a>
+    </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <div class="movieBox">
+        <div class="movieImg"></div>
+        <div class="movieDetail">
+            <h3>Godzilla vs Kong</h3>
+            <div id="movieAttr">
+                <div style="color: rgb(228, 228, 0);">English</div>
+                <div>2Hr9m</div>
+                <div>6.4/10</div>
+                <div style="color: #00FF38; -webkit-text-stroke: black 0.5px;"><b>Action,Adventure,Fantasy</b></div>
+                <div>UA</div>
+                <div>18 Mar, 2021</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="seatLayout">
+        <div id="balcony-seat"></div>
+        <div id="front-seat"></div>
+        <div id="screen"> Screen</div>
+    </div>
+    <center>
+        <div id="order">
+            <p id="movieName">Movie Name: </p>
+            <p id="seatType">Seat Type: </p>
+            <p id="seatCount">No.of Seat: </p>
+            <p id="seatNo">Seat No: </p>
+            <p id="amount">Total Amount:</p>
+        </div>
+        <br>
+        <div class="grid-item5">
+            <a href="#" class="book" onclick="alert('Payment Gateway is not connected!')">
+                <div class="book">BOOK</div>
+            </a>
+        </div>
+    </center>
+
+    <div class="cast">
+        <div style="padding: 10px;">
+            <h4>CAST</h4>
+        </div>
+        <div class="castContainer">
+            <div>
+                <p>Alexander Skarsgard</p>
+                <p>as</p>
+                <p>Nathan Lind</p>
+            </div>
+            <div>
+                <p>Mille Bobby Brown</p>
+                <p>as</p>
+                <p>Madison Russell</p>
+            </div>
+            <div>
+                <p>Rebecca Hall</p>
+                <p>as</p>
+                <p>Ilene Andrews</p>
+            </div>
+            <div>
+                <p>Elza Gonzalez</p>
+                <p>as</p>
+                <p>Maya Simmons</p>
+            </div>
+        </div>
+    </div>
+    <div class="movieGal">
+        <div class="container">
+            <div class="slide" id="m1"></div>
+            <div class="slide" id="m2"></div>
+            <div class="slide" id="m3"></div>
+        </div>
+        <p style="text-align: center;">
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </p>
+    </div>
+
+    <div class="footer">
+
+        <p><a href="#">HOME</a><br></p>
+        <p><a href="#">Contact</a></p>
+        <p>Copyright 2021 &#169; Something Pvt. Ltd.</p>
+        <p>All Right Are Reserved.</p>
+    </div>
+
+</body>
+<script>
+    var balcony = document.getElementById('balcony-seat');
+    var front = document.getElementById('front-seat');
+    // var seatB = document.createElement('div');
+    var seatB = new Array();
+    var seatF = new Array();
+    for (var i = 1; i <= 6; i++) {
+        for (var j = 1; j <= 30; j++) {
+            seatB[j] = document.createElement('div');
+            seatB[j].setAttribute("id", "B" + i + "" + j);
+            seatB[j].setAttribute("onclick", "setSeat(this.id)");
+            seatB[j].style.height = "20px";
+            seatB[j].style.width = "20px";
+            seatB[j].style.border = "1px solid #0000FF";
+            seatB[j].style.cursor = "pointer";
+            seatB[j].style.backgroundColor = "purple";
+            balcony.append(seatB[j]);
+            // seatB[j].append(i+''+j)
+
+        }
+    }
+
+    for (var i = 1; i <= 5; i++) {
+        for (var j = 1; j <= 20; j++) {
+            seatF[j] = document.createElement('div');
+            seatF[j].setAttribute('id', "F" + i + "" + j);
+            seatF[j].setAttribute("onclick", "setSeat(this.id)");
+            seatF[j].style.height = "20px";
+            seatF[j].style.width = "20px";
+            seatF[j].style.border = "1px solid #0000FF";
+            seatF[j].style.cursor = "pointer";
+            seatF[j].style.backgroundColor = "skyblue";
+            front.append(seatF[j]);
+            // seatB[j].append(i+''+j)
+
+        }
+    }
+
+
+    var seatTypeB = "";
+    var seatTypeF = "";
+    var seatCountB = 0;
+    var seatCountF = 0;
+    var seatNumber = "";
+    var priceB = 0;
+    var priceF = 0;
+
+    function setSeat(seatno) {
+        if (document.querySelector("#" + seatno).style.backgroundColor != "green") {
+            console.log(seatno);
+            document.getElementById(seatno).style.backgroundColor = "green";
+            order = document.getElementById('order');
+
+            // seatCount = seatCount + 1;
+            seatNumber = seatNumber + ", " + seatno;
+
+            if (seatno.includes('B')) {
+                seatTypeB = "Balcony"
+                priceB = 450;
+                seatCountB = seatCountB + 1;
+            } else if (seatno.includes('F')) {
+                seatTypeF = "Stalls";
+                priceF = 550;
+                seatCountF = seatCountF + 1;
+            }
+        }else if (document.querySelector("#" + seatno).style.backgroundColor == "green" && seatno.includes('B')){
+            document.getElementById(seatno).style.backgroundColor = "purple";
+            seatNumber=seatNumber.replace(seatno+",","");
+        }else if(document.querySelector("#" + seatno).style.backgroundColor == "green" && seatno.includes('F')) {
+            document.getElementById(seatno).style.backgroundColor = "skyblue";
+        }
+
+
+        var amount = (priceB * seatCountB) + (priceF * seatCountF);
+
+
+        document.getElementById('movieName').innerHTML = "Movie Name:  Godzilla Vs Kong";
+        document.getElementById('seatType').innerHTML = "Seat Type:   " + seatTypeB + " " + seatTypeF;
+        document.getElementById('seatCount').innerHTML = "No.of Seat:  " + seatCountB + "X" + priceB + " " +
+            seatCountF + "X" + priceF;
+        document.getElementById('seatNo').innerHTML = "Seat No:     " + seatNumber;
+        document.getElementById('amount').innerHTML = "Total Amount: Rs." + amount;
+    }
+</script>
+
+</html>
